@@ -48,9 +48,9 @@ SITE_PASSWORD=
 | `FEISHU_BITABLE_TABLE_ID` | 多维表格链接中 `table=` 后面的部分 |
 | `SITE_PASSWORD` | 自定义访问密码，留空则不启用密码保护 |
 
-示例链接：`https://xxx.feishu.cn/base/ViN8bRbdfa7P4isDu63c6Wqinme?table=tblsx3RHHWdLN0aY`
-- APP_TOKEN = `ViN8bRbdfa7P4isDu63c6Wqinme`
-- TABLE_ID = `tblsx3RHHWdLN0aY`
+示例链接：`https://xxx.feishu.cn/base/xxxxxxxxxxxxxxxxxxxxxx?table=tblxxxxxxxxxxxxxxxxxx`
+- APP_TOKEN = `xxxxxxxxxxxxxxxxxxxxxx`（`/base/` 后面的部分）
+- TABLE_ID = `tblxxxxxxxxxxxxxxxxxx`（`table=` 后面的部分）
 
 ## 飞书多维表格结构
 
@@ -109,18 +109,39 @@ SITE_PASSWORD=
 
 ## 部署
 
+### 国内 — 腾讯 EdgeOne（需要已备案域名）
+
+适合国内用户访问，速度更快。
+
+1. 登录 [腾讯云 EdgeOne](https://console.cloud.tencent.com/edgeone) → Pages → 新建项目
+2. 关联 GitHub 仓库，框架选 **Next.js**
+3. 在「环境变量」中添加四个变量（同下）
+4. 绑定已备案的自定义域名
+
+### 国外 — Vercel（无需域名）
+
+适合没有备案域名的情况，部署最简单。
+
+1. 访问 [vercel.com](https://vercel.com)，导入 GitHub 仓库
+2. 框架自动识别为 Next.js
+3. 在「Environment Variables」中添加以下四个变量：
+
+| 变量名 | 说明 |
+|--------|------|
+| `FEISHU_APP_ID` | 飞书应用 ID |
+| `FEISHU_APP_SECRET` | 飞书应用密钥 |
+| `FEISHU_BITABLE_APP_TOKEN` | 多维表格 Token |
+| `FEISHU_BITABLE_TABLE_ID` | 表格 ID |
+| `SITE_PASSWORD` | 访问密码（可选） |
+
+4. 点击 Deploy，完成后 Vercel 会分配一个 `*.vercel.app` 域名直接可用
+
+### 本地 / 自托管
+
 ```bash
 npm run build
 npm start
 ```
-
-或部署到 Vercel：
-
-```bash
-vercel deploy
-```
-
-在 Vercel 项目设置的 Environment Variables 中添加上述四个环境变量即可。
 
 ## 技术栈
 
